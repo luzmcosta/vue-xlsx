@@ -39,7 +39,6 @@
     "eslint-plugin-vue": ">=5.2.2",
     "hasky": "^3.0.2",
     "husky": "^7.0.4",
-    "lint-staged": ">=8.1.7",
     "rollup": ">=1.13.0",
     "rollup-copy-plugin": ">=0.1.0",
     "rollup-plugin-css-only": "^3.1.0",
@@ -63,16 +62,6 @@
     "vuejs"
   ],
   "license": "MIT",
-  "lint-staged": {
-    "*.js": [
-      "vue-cli-service lint",
-      "git add"
-    ],
-    "*.vue": [
-      "vue-cli-service lint",
-      "git add"
-    ]
-  },
   "main": "dist/vue-xlsx.cjs.js",
   "unpkg": "dist/vue-xlsx.umd.js",
   "module": "dist/vue-xlsx.es.js",
