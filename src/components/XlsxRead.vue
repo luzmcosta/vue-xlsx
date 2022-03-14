@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     async load() {
-      const { globalPolyfill } = require("../polyfills");
+      const { globalPolyfill } = await import("../polyfills");
       globalPolyfill();
       const { read } = await import("xlsx");
       this._read = read;

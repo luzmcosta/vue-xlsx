@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     async load() {
-      const { globalPolyfill } = require("../polyfills");
+      const { globalPolyfill } = await import("../polyfills");
       globalPolyfill();
       const {
         utils: { book_new, book_append_sheet }
