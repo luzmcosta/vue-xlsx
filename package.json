@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "rollup -c --environment NODE_ENV:production",
-    "prepare": "npm run build",
+    "prepare": "husky install",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "docs:prepare": "yarn prepare && rm -rf docs/dist/ && mkdir docs/dist/ && cp -r dist docs/",
@@ -57,11 +57,6 @@
   "files": [
     "dist/"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "keywords": [
     "vue",
     "xlsx",
