@@ -88,6 +88,9 @@ export default [
       babel({
         babelHelpers: 'runtime',
         exclude: 'node_modules/**',
+      }),
+      copy({
+        'src/polyfills.js': 'dist/polyfills.js'
       })
     ]
   },
