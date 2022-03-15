@@ -32,7 +32,11 @@ const mapEntry = (f, ext, folder) => ({
       css: false,
     }),
     css(),
-  ]
+    babel({
+      exclude: "node_modules/**",
+      runtimeHelpers: true
+    }),
+  ],
 });
 
 export default [
@@ -53,7 +57,11 @@ export default [
       node({
         extensions: ['.vue', '.js']
       }),
-    ]
+      babel({
+        exclude: "node_modules/**",
+        runtimeHelpers: true
+      }),
+    ],
   },
   {
     input: 'src/index.js',
