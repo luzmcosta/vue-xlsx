@@ -4,7 +4,6 @@ import node from '@rollup/plugin-node-resolve';
 import cjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import css from 'rollup-plugin-css-only'
-import copy from 'rollup-copy-plugin';
 
 import fs from 'fs';
 
@@ -20,7 +19,7 @@ const mapEntry = (f, ext, folder) => ({
   external: ['vue', 'xlsx'],
   output: {
     format: 'esm',
-    file: `dist/${folder}${f.replace(ext, 'js')}`
+    dir: './dist',
   },
   plugins: [
     replace({
@@ -57,10 +56,6 @@ export default [
         extensions: ['.vue', '.js']
       }),
       cjs(),
-      copy({
-        'src/index.js': 'dist/vue-xlsx.es.js',
-        'src/polyfills.js': 'dist/polyfills.js'
-      })
     ]
   },
   {
@@ -69,7 +64,7 @@ export default [
     output: [
       {
         format: 'cjs',
-        file: 'dist/vue-xlsx.cjs.js'
+        dir: './dist',
       }
     ],
     plugins: [
@@ -89,18 +84,15 @@ export default [
         babelHelpers: 'runtime',
         exclude: 'node_modules/**',
       }),
-      copy({
-        'src/polyfills.js': 'dist/polyfills.js'
-      })
     ]
   },
   {
     input: 'src/index.js',
     external: ['vue', 'xlsx'],
     output: {
+      dir: './dist',
       format: 'umd',
       name: 'vue-xlsx',
-      file: 'dist/vue-xlsx.umd.js',
       globals: {
         vue: 'Vue'
       }
