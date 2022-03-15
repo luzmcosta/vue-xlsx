@@ -1,7 +1,6 @@
 import vue from 'rollup-plugin-vue';
 import replace from '@rollup/plugin-replace';
 import node from '@rollup/plugin-node-resolve';
-import cjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import css from 'rollup-plugin-css-only'
 
@@ -32,7 +31,6 @@ const mapEntry = (f, ext, folder) => ({
     vue({
       css: false,
     }),
-    cjs(),
     css(),
   ]
 });
@@ -55,7 +53,6 @@ export default [
       node({
         extensions: ['.vue', '.js']
       }),
-      cjs(),
     ]
   },
   {
@@ -63,7 +60,7 @@ export default [
     external: ['vue', 'xlsx'],
     output: [
       {
-        format: 'cjs',
+        format: 'esm',
         dir: './dist',
       }
     ],
@@ -78,42 +75,11 @@ export default [
       vue({
         css: false,
       }),
-      cjs(),
       css(),
       babel({
         babelHelpers: 'runtime',
         exclude: 'node_modules/**',
       }),
-    ]
-  },
-  {
-    input: 'src/index.js',
-    external: ['vue', 'xlsx'],
-    output: {
-      dir: './dist',
-      format: 'umd',
-      name: 'vue-xlsx',
-      globals: {
-        vue: 'Vue'
-      }
-    },
-    plugins: [
-      replace({
-        preventAssignment: true,
-        values: { 'process.env.NODE_ENV': 'production' },
-      }),
-      node({
-        extensions: ['.vue', '.js']
-      }),
-      vue({
-        css: false,
-      }),
-      cjs(),
-      css(),
-      babel({
-        babelHelpers: 'runtime',
-        exclude: 'node_modules/**',
-      })
     ]
   }
 ];

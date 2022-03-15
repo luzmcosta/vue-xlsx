@@ -62,9 +62,9 @@
     "vuejs"
   ],
   "license": "MIT",
-  "main": "dist/vue-xlsx.cjs.js",
-  "unpkg": "dist/vue-xlsx.umd.js",
-  "module": "dist/vue-xlsx.es.js",
+  "main": "dist/index.js",
+  "unpkg": "src/index.js",
+  "module": "dist/index.js",
   "sideEffects": [
     "polyfills.js"
   ],
