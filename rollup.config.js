@@ -33,8 +33,8 @@ const mapEntry = (f, ext, folder) => ({
     }),
     css(),
     babel({
+      babelHelpers: 'runtime',
       exclude: "node_modules/**",
-      runtimeHelpers: true
     }),
   ],
 });
@@ -58,8 +58,8 @@ export default [
         extensions: ['.vue', '.js']
       }),
       babel({
+        babelHelpers: 'runtime',
         exclude: "node_modules/**",
-        runtimeHelpers: true
       }),
     ],
   },
