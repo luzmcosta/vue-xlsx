@@ -53,9 +53,6 @@
   "resolutions": {
     "webpack-dev-middleware": "3.6.0"
   },
-  "files": [
-    "dist/"
-  ],
   "keywords": [
     "vue",
     "xlsx",
@@ -63,7 +60,6 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
-  "unpkg": "src/index.js",
   "module": "dist/index.js",
   "sideEffects": [
     "polyfills.js"
