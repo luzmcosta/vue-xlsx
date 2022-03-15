@@ -74,7 +74,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/DonNicoJs/vue-xlsx.git"
+    "url": "git://github.com/luzmcosta/vue-xlsx.git"
   },
   "dependencies": {
     "core-js": "^3.21.1"
