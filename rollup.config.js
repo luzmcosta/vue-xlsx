@@ -1,10 +1,14 @@
+import fs from 'fs';
+
+import cjs from '@rollup/plugin-commonjs'
 import vue from 'rollup-plugin-vue';
 import replace from '@rollup/plugin-replace';
 import node from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import css from 'rollup-plugin-css-only'
+import copy from 'rollup-copy-plugin';
 
-import fs from 'fs';
+import pkg from './package.json'
 
 const baseFolder = './src/';
 const componentFolder = 'components/';
@@ -13,32 +17,37 @@ const mixinFolder = 'mixins/';
 const components = fs.readdirSync(baseFolder + componentFolder);
 const mixins = fs.readdirSync(baseFolder + mixinFolder);
 
-const outputFormat = 'es'
-const babelConfig = {
+const formatOutput = 'esm'
+const fileTypesExternal = ['vue', 'xlsx']
+
+const configBabel = {
   babelHelpers: 'bundled',
-  exclude: "node_modules/**",
+  exclude: 'node_modules/**',
+}
+const configNode = {
+  extensions: ['.js', '.vue'],
+}
+const configReplace = {
+  preventAssignment: true,
+  values: { 'process.env.NODE_ENV': 'production' },
+}
+const configVue = {
+  compileTemplate: true,
+  css: false,
 }
 
 const mapEntry = (f, ext, folder) => ({
   input: baseFolder + folder + f,
-  external: ['vue', 'xlsx'],
+  external: fileTypesExternal,
   output: {
-    format: outputFormat,
-    dir: './dist',
+    format: formatOutput,
+    dir: `dist/${folder}${f.replace(ext, 'js')}`,
   },
   plugins: [
-    replace({
-      preventAssignment: true,
-      values: { 'process.env.NODE_ENV': 'production' },
-    }),
-    node({
-      extensions: ['.vue', '.js']
-    }),
-    vue({
-      css: false,
-    }),
-    css(),
-    babel(babelConfig),
+    replace(configReplace),
+    node(configNode),
+    vue(configVue),
+    cjs(),
   ],
 });
 
@@ -47,44 +56,38 @@ export default [
   ...mixins.map(f => mapEntry(f, 'js', mixinFolder)),
   {
     input: './src/utils.js',
-    external: ['vue', 'xlsx'],
+    external: fileTypesExternal,
     output: {
-      format: outputFormat,
+      format: formatOutput,
       file: `dist/utils.js`
     },
     plugins: [
-      replace({
-        preventAssignment: true,
-        values: { 'process.env.NODE_ENV': 'production' },
-      }),
-      node({
-        extensions: ['.vue', '.js']
-      }),
-      babel(babelConfig),
+      replace(configReplace),
+      node(configNode),
+      cjs(),
+      copy({
+        'src/index.js': pkg.module,
+        'src/polyfills.js': 'dist/polyfills.js',
+      })
     ],
   },
   {
     input: 'src/index.js',
-    external: ['vue', 'xlsx'],
+    external: fileTypesExternal,
     output: [
       {
-        format: outputFormat,
-        dir: './dist',
+        dir: 'dist',
+        // file: pkg.main,
+        format: 'cjs',
       }
     ],
     plugins: [
-      replace({
-        preventAssignment: true,
-        values: { 'process.env.NODE_ENV': 'production' },
-      }),
-      node({
-        extensions: ['.vue', '.js']
-      }),
-      vue({
-        css: false,
-      }),
+      replace(configReplace),
+      node(configNode),
+      babel(configBabel),
       css(),
-      babel(babelConfig),
+      vue(configVue),
+      cjs(),
     ]
-  }
+  },
 ];

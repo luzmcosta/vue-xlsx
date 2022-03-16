@@ -16,7 +16,8 @@
     "test:unit": "vue-cli-service test:unit",
     "docs:prepare": "yarn prepare && rm -rf docs/dist/ && mkdir docs/dist/ && cp -r dist docs/",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "yarn docs:prepare && vuepress build docs"
+    "docs:build": "yarn docs:prepare && vuepress build docs",
+    "update:browserslist": "npx browserslist@latest --update-db"
   },
   "dependencies": {
     "core-js": "^3.21.1"
@@ -62,8 +63,8 @@
     "vuejs"
   ],
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/vue-xlsx.cjs.js",
+  "module": "dist/vue-xlsx.es.js",
   "sideEffects": [
     "polyfills.js"
   ],

@@ -11,10 +11,9 @@ module.exports = {
           version: 3,
         },
         targets: {
-          browsers: 'last 2 versions',
+          browsers: 'last 2 versions and not dead',
         },
-        modules: false,
-        useBuiltIns: 'usage',
+        useBuiltIns: 'entry',
       },
     ],
   ],
