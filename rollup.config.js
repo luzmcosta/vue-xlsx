@@ -13,11 +13,17 @@ const mixinFolder = 'mixins/';
 const components = fs.readdirSync(baseFolder + componentFolder);
 const mixins = fs.readdirSync(baseFolder + mixinFolder);
 
+const outputFormat = 'es'
+const babelConfig = {
+  babelHelpers: 'bundled',
+  exclude: "node_modules/**",
+}
+
 const mapEntry = (f, ext, folder) => ({
   input: baseFolder + folder + f,
   external: ['vue', 'xlsx'],
   output: {
-    format: 'esm',
+    format: outputFormat,
     dir: './dist',
   },
   plugins: [
@@ -32,10 +38,7 @@ const mapEntry = (f, ext, folder) => ({
       css: false,
     }),
     css(),
-    babel({
-      babelHelpers: 'runtime',
-      exclude: "node_modules/**",
-    }),
+    babel(babelConfig),
   ],
 });
 
@@ -46,7 +49,7 @@ export default [
     input: './src/utils.js',
     external: ['vue', 'xlsx'],
     output: {
-      format: 'esm',
+      format: outputFormat,
       file: `dist/utils.js`
     },
     plugins: [
@@ -57,10 +60,7 @@ export default [
       node({
         extensions: ['.vue', '.js']
       }),
-      babel({
-        babelHelpers: 'runtime',
-        exclude: "node_modules/**",
-      }),
+      babel(babelConfig),
     ],
   },
   {
@@ -68,7 +68,7 @@ export default [
     external: ['vue', 'xlsx'],
     output: [
       {
-        format: 'esm',
+        format: outputFormat,
         dir: './dist',
       }
     ],
@@ -84,10 +84,7 @@ export default [
         css: false,
       }),
       css(),
-      babel({
-        babelHelpers: 'runtime',
-        exclude: 'node_modules/**',
-      }),
+      babel(babelConfig),
     ]
   }
 ];
