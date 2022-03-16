@@ -5,7 +5,17 @@ module.exports = {
   presets: [
     [
       '@vue/cli-plugin-babel/preset',
-      { useBuiltIns: 'entry' },
+      {
+        corejs: {
+          proposals: false,
+          version: 3,
+        },
+        targets: {
+          browsers: 'last 2 versions',
+        },
+        modules: false,
+        useBuiltIns: 'usage',
+      },
     ],
   ],
 };

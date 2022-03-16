@@ -18,6 +18,9 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "yarn docs:prepare && vuepress build docs"
   },
+  "dependencies": {
+    "core-js": "^3.21.1"
+  },
   "devDependencies": {
     "@babel/core": ">=7.4.5",
     "@babel/eslint-parser": "^7.17.0",
@@ -71,8 +74,5 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/luzmcosta/vue-xlsx.git"
-  },
-  "dependencies": {
-    "core-js": "^3.21.1"
   }
 }
