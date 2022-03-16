@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "rollup -c --environment NODE_ENV:production",
-    "prepare": "npm i; npm run build",
+    "prepare": "npm run build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "docs:prepare": "yarn prepare && rm -rf docs/dist/ && mkdir docs/dist/ && cp -r dist docs/",
